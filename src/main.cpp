@@ -21,6 +21,8 @@ bool SwitchOverride;
 
 float isArcadeDrive;
 
+float speedMultiplier = 1;
+
 void timerLoop();
 void ReadController();
 void Task();
@@ -124,7 +126,7 @@ void Task()
 
 	//Serial.println(digitalRead(34));
 
-	if (false)
+	if (true)
 	{
 		//do exponential
 
@@ -164,6 +166,12 @@ void Task()
 			}
 		}
 	}
+
+	if (true)
+	{
+		DriveLeftSpeed *= speedMultiplier;
+		DriveRightSpeed *= speedMultiplier;
+	}
 }
 
 void ReadController()
@@ -189,6 +197,29 @@ void ReadController()
 				else if (Xbox.getButtonPress(L2, i))
 				{
 					TriggerAggregate = 255.0 / 255 * Xbox.getButtonPress(L2, i) * 1;
+				}
+
+				if (Xbox.getButtonClick(R1, i))
+				{
+
+					MOGO(255);
+					delay(750);
+				}
+				else if (Xbox.getButtonClick(L1))
+				{
+					MOGO(-255);
+					delay(350);
+				}
+
+				if (Xbox.getButtonClick(Y, i))
+				{
+					if (speedMultiplier < 1)
+						speedMultiplier += 0.1;
+				}
+				else if (Xbox.getButtonClick(X))
+				{
+					if (speedMultiplier > .1)
+						speedMultiplier -= 0.1;
 				}
 
 				if (Xbox.getAnalogHat(LeftHatX, i) > 7500 || Xbox.getAnalogHat(LeftHatX, i) < -7500 || Xbox.getAnalogHat(LeftHatY, i) > 7500 || Xbox.getAnalogHat(LeftHatY, i) < -7500 || Xbox.getAnalogHat(RightHatX, i) > 7500 || Xbox.getAnalogHat(RightHatX, i) < -7500 || Xbox.getAnalogHat(RightHatY, i) > 7500 || Xbox.getAnalogHat(RightHatY, i) < -7500)
@@ -238,90 +269,108 @@ void ReadController()
 					SwitchOverride = !SwitchOverride;
 				}
 
-
-
 				if (Xbox.getButtonClick(XBOX, i))
 				{
-					Drive(150,150);
-					delay(1000);
-
-					Drive(0,0);
-				}
-
-				if (Xbox.getButtonClick(UP, i))
-				{
-					
 					MOGO(-200);
 					delay(650);
 
 					MOGO(0);
-					Drive(250,250);
-					delay(300);
+					Drive(150, 150);
+					delay(550);
 
-					Drive(0,0);
+					Drive(0, 0);
 					delay(500);
 
+					Drive(150, 150);
+					delay(450);
+					Drive(100, 100);
+					delay(750);
 
-					Drive(250,250);
-					delay(700);
+					Drive(0, 0);
+					MOGO(200);
+					delay(1000);
+
+					MOGO(0);
+				}
+
+				if (Xbox.getButtonClick(UP, i))
+				{
+
+					MOGO(-200);
+					delay(650);
+
+					MOGO(0);
+					Drive(150, 150);
+					delay(500);
+
+					Drive(0, 0);
+					delay(500);
+
+					Drive(150, 150);
+					delay(1200);
+					Drive(200, 200);
+					delay(200);
 
 					MOGO(200);
 					delay(1000);
 
 					MOGO(0);
 					delay(1300);
-				    
-                    Drive(0,0);
-                    delay(500);
+
+					Drive(0, 0);
+					delay(500);
 
 					MOGO(-200);
 					delay(300);
 					MOGO(0);
 
-					Drive(-255,-255);
-					delay(1500);
+					Drive(-150, -150);
+					delay(2000);
 
-					Drive(0,0);
-
+					Drive(0, 0);
 				}
 
-					//match auton
+				//match auton
 				if (Xbox.getButtonClick(DOWN, i))
 				{
-					
+
 					MOGO(-200);
 					delay(650);
 
 					MOGO(0);
-					Drive(250,250);
-					delay(250);
+					Drive(150, 150);
+					delay(550);
 
-					Drive(0,0);
+					Drive(0, 0);
 					delay(500);
 
-
-					Drive(150,150);
+					Drive(150, 150);
 					delay(450);
-					Drive(100,100);
+					Drive(100, 100);
 					delay(750);
 
-                    Drive(0,0);
+					Drive(0, 0);
 					MOGO(200);
 					delay(1000);
 
 					MOGO(0);
-					
-                    Drive(0,-150);
-					delay(1400);
 
-					Drive(150,150);
-					delay(1500);
-					
-					Drive(0,0);
+					Drive(0, -150);
+					delay(2200);
+
+					Drive(150, 150);
+					delay(1750);
+
+					Drive(0, 0);
 					MOGO(-200);
 					delay(300);
-					Drive(-250,-250);
+					//Drive(-250,-250);
+					//delay(300);
+
+					Drive(0, -150);
 					delay(500);
+					Drive(-200, -200);
+					delay(1000);
 				}
 			}
 		}
