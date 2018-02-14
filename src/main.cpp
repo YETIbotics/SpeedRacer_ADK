@@ -330,6 +330,49 @@ void ReadController()
 					Drive(0, 0);
 				}
 
+				/* //match auton
+				if (Xbox.getButtonClick(DOWN, i))
+				{
+
+					MOGO(-200);
+					delay(650);
+
+					MOGO(0);
+					Drive(150, 150);
+					delay(550);
+
+					Drive(0, 0);
+					delay(500);
+
+					Drive(150, 150);
+					delay(450);
+					Drive(100, 100);
+					delay(750);
+
+					Drive(0, 0);
+					MOGO(200);
+					delay(1000);
+
+					MOGO(0);
+
+					Drive(0, -150);
+					delay();
+
+					Drive(150, 150);
+					delay(1750);
+
+					Drive(0, 0);
+					MOGO(-200);
+					delay(300);
+					//Drive(-250,-250);
+					//delay(300);
+
+					Drive(0, -150);
+					delay(500);
+					Drive(-200, -200);
+					delay(1000);
+				} */
+
 				//match auton
 				if (Xbox.getButtonClick(DOWN, i))
 				{
